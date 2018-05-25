@@ -1,6 +1,6 @@
 {
   "name": "@blacksmithstudio/blockbase-cache",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "blockbase cache driver for Express",
   "main": "driver.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org:blacksmithstudio/driver-cache.git"
+    "url": "git+ssh://git@github.com:blacksmithstudio/blockbase-cache.git"
   },
   "author": "Sebastien Hideux <seb@blacksmith.studio>",
   "license": "MIT",
