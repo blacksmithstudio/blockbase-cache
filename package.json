@@ -1,10 +1,10 @@
 {
-  "name": "@blacksmithstudio/blockbase-cache",
+  "name": "blockbase-cache",
   "version": "0.1.1",
   "description": "blockbase cache driver for Express",
   "main": "driver.js",
   "scripts": {
-    "test": "mocha --harmony-async-await"
+    "test": "mocha --exit"
   },
   "repository": {
     "type": "git",

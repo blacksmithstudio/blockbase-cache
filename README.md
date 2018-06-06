@@ -9,7 +9,7 @@ Compatible with Blockbase Framework
 
 ### How to install ?
 ```shell
-$ npm i --save @blacksmithstudio/blockbase-cache
+$ npm i --save blockbase-cache
 ```
 
 Then add to your `config/{env}.yml` the following (example) instructions depending of your system
@@ -162,8 +162,8 @@ Be also careful `redis` is mandatory when you use the cache...
 
 License
 ----
-
-(Copyright) 2018 - Sebastien Hideux for Blacksmith S.A.S.
+(Licence [MIT](https://github.com/blacksmithstudio/blockbase-express/blob/master/LICENCE))
+Coded by [Blacksmith](https://www.blacksmith.studio)
 
 
 **Free Software, Hell Yeah!**
