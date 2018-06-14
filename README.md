@@ -2,9 +2,9 @@
 Compatible with Blockbase Framework
 
 ### Version
-0.1.1
+0.1.6
 
-######TODO : 
+###### TODO :
 - add debug configuration option
 
 ### How to install ?
@@ -24,7 +24,7 @@ redis:
 cache: 
     disabled: false
 ```
-####Don't want to read ?
+#### Don't want to read ?
 *->* Jump to the **./sample.js** sample
 
 ### Cache logic
@@ -47,7 +47,7 @@ It can be instanciated using the following parameters, us :
 ```js
 
     let moduleCacheKey = 'models.user'
-    let cacheExpire = 60 // seconds
+    let cacheExpire = 60 // seconds - default is 0
     const cache = new Cache(moduleCacheKey, cacheExpire) 
 ```
 
@@ -61,7 +61,7 @@ It can be instanciated using the following parameters, us :
  - Example value : *[]*
  
  ```js
-    await app.drivers.cache.set('user.list', opt, userList)
+    await app.drivers.cache.set('user.list', userList, opt)
  ```
  
  This way, when you call your function **user.list** without _varying parameters_, 
@@ -92,7 +92,7 @@ It can be instanciated using the following parameters, us :
  ```js
     let opt = {limit: 100, offset:0}
     //retrieve your userlist...
-    await app.drivers.cache.set('user.list', opt, userList)
+    await app.drivers.cache.set('user.list', userList, opt)
  ```
 
 Here the cache driver will generate a **field** name according to your parameters, which gives us for example :
@@ -113,7 +113,7 @@ So the driver will give you back the correct data depending on your input parame
 
 ### Usage
 
-#####1) Set
+##### 1) Set
 
 Store a value in cache according to 3 params : 
 - Cache key : for ex your function name
@@ -123,7 +123,7 @@ Store a value in cache according to 3 params :
 For now params can be a an object with one level of keys/values, or can also be an Array
 
 ```js
-    await app.drivers.cache.set('user.list', null, userList)
+    await app.drivers.cache.set('user.list', userList)
     
     //Or with varying params :
     let opt = {limit: 100, offset: 0}
@@ -134,7 +134,7 @@ For now params can be a an object with one level of keys/values, or can also be 
     await app.drivers.cache.set('user.list', opt, userList)
 ```
 
-#####2) Get
+##### 2) Get
 
 Retrieve a value from cache :
 
@@ -146,7 +146,7 @@ Retrieve a value from cache :
     await app.drivers.cache.get('user.list', opt) 
 ```
 
-#####3) Clear
+##### 3) Clear
 
 To clear a cache key, or fully clear the module's cache :
 

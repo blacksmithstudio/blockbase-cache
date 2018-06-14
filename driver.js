@@ -49,11 +49,11 @@ module.exports = function (app) {
         /**
          * Set
          * @param {string}  cacheKey - the cache key
-         * @param {object=}  params - parameters (cache key varies on params values)
          * @param {object}  value - the value to store
+         * @param {object=} params - parameters (cache key varies on params values)
          * @returns {string}
          */
-        async set(cacheKey, params, value) {
+        async set(cacheKey, value, params) {
             if (this._disabled) return null
             if (params && typeof params != 'object')
                 throw Error('Cache Set | invalid type for object params')
