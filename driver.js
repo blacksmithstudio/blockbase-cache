@@ -38,7 +38,7 @@ module.exports = function (app) {
          * @param {string}  moduleCacheKey - the key prefix on which the keys will be generated
          * @param {number=} cacheExpire - seconds
          */
-        constructor(moduleCacheKey, cacheExpire) {
+        constructor(moduleCacheKey, cacheExpire = 0) {
             this._moduleCacheKey = moduleCacheKey
             this._cacheExpire = cacheExpire
             this._disabled = !!app.config.cache.disabled
@@ -73,7 +73,7 @@ module.exports = function (app) {
             // console.log('formattedKey', formattedKey)
             try {
                 let res = await redis.hset(this._moduleCacheKey, formattedKey, JSON.stringify(value)) //seconds
-                if (this._cacheExpire)
+                if (this._cacheExpire > 0)
                     await redis.expire(this._moduleCacheKey, this._cacheExpire)
 
                 return res
@@ -94,7 +94,7 @@ module.exports = function (app) {
             if (this._disabled) return null
             if (params && typeof params != 'object')
                 throw Error('Cache Get | invalid type for object params')
-            if (!params) return null
+            //if (!params) return null
             // console.log('GET params', params)
 
             let formattedKey = 'default'
