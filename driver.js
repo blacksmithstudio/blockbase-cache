@@ -35,8 +35,8 @@ module.exports = function (app) {
 
         /**
          * Constructor
-         * @param moduleCacheKey
-         * @param cacheExpire - seconds
+         * @param {string}  moduleCacheKey - the key prefix on which the keys will be generated
+         * @param {number=} cacheExpire - seconds
          */
         constructor(moduleCacheKey, cacheExpire) {
             this._moduleCacheKey = moduleCacheKey
@@ -59,21 +59,22 @@ module.exports = function (app) {
                 throw Error('Cache Set | invalid type for object params')
             // console.log('SET params', params)
 
-            let formattedKey = 'default';
+            let formattedKey = 'default'
             if (params) {
                 if (Array.isArray(params))
                     formattedKey = params.reduce((sum, v) => sum + '.' + v, 'array:')
                 else {
 
                     let keys = Object.keys(params).filter(k => params.hasOwnProperty(k))
-                    formattedKey = keys.reduce((sum, p) => '' + params[p] ? sum + '.' + `${p}:${_format(params[p])}` : sum + `.${p}.`, `${cacheKey}`);
+                    formattedKey = keys.reduce((sum, p) => '' + params[p] ? sum + '.' + `${p}:${_format(params[p])}` : sum + `.${p}.`, `${cacheKey}`)
                 }
             }
 
             // console.log('formattedKey', formattedKey)
             try {
                 let res = await redis.hset(this._moduleCacheKey, formattedKey, JSON.stringify(value)) //seconds
-                await redis.expire(this._moduleCacheKey, this._cacheExpire)
+                if (this._cacheExpire)
+                    await redis.expire(this._moduleCacheKey, this._cacheExpire)
 
                 return res
             }
@@ -96,14 +97,14 @@ module.exports = function (app) {
             if (!params) return null
             // console.log('GET params', params)
 
-            let formattedKey = 'default';
+            let formattedKey = 'default'
             if (params) {
                 if (Array.isArray(params))
                     formattedKey = params.reduce((sum, v) => sum + '.' + v, 'array:')
                 else {
 
                     let keys = Object.keys(params).filter(k => params.hasOwnProperty(k))
-                    formattedKey = keys.reduce((sum, p) => '' + params[p] ? sum + '.' + `${p}:${_format(params[p])}` : sum + `.${p}.`, `${cacheKey}`);
+                    formattedKey = keys.reduce((sum, p) => '' + params[p] ? sum + '.' + `${p}:${_format(params[p])}` : sum + `.${p}.`, `${cacheKey}`)
                 }
             }
 
