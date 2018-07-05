@@ -69,6 +69,9 @@ module.exports = function (app) {
                     formattedKey = keys.reduce((sum, p) => '' + params[p] ? sum + '.' + `${p}:${_format(params[p])}` : sum + `.${p}.`, `${cacheKey}`)
                 }
             }
+            else
+                formattedKey = formattedKey + ':' + cacheKey
+
 
             // console.log('formattedKey', formattedKey)
             try {
@@ -107,6 +110,8 @@ module.exports = function (app) {
                     formattedKey = keys.reduce((sum, p) => '' + params[p] ? sum + '.' + `${p}:${_format(params[p])}` : sum + `.${p}.`, `${cacheKey}`)
                 }
             }
+            else
+                formattedKey = formattedKey + ':' + cacheKey
 
             try {
                 let cached = await redis.hget(this._moduleCacheKey, formattedKey)
